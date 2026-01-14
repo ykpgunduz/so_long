@@ -6,7 +6,7 @@
 /*   By: yagunduz <yagunduz@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/24 00:00:00 by yagunduz          #+#    #+#             */
-/*   Updated: 2026/01/13 20:28:27 by yagunduz         ###   ########.fr       */
+/*   Updated: 2026/01/14 20:24:14 by yagunduz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 void	init_game(t_game *game, char *map_file)
 {
-	game->mlx_ptr = mlx_init();
-	if (!game->mlx_ptr)
-		error_exit("Error\nMLX initialization failed");
+	game->mlx_ptr = NULL;
 	game->win_ptr = NULL;
 	game->img.stone = NULL;
 	game->img.grass = NULL;
@@ -28,12 +26,15 @@ void	init_game(t_game *game, char *map_file)
 	game->img.finish = NULL;
 	game->player.direction = 1;
 	init_map(map_file, game);
+	game->mlx_ptr = mlx_init();
+	if (!game->mlx_ptr)
+		error_exit("Error\nMLX initialization failed", game);
 	game->win_width = game->map.cols * TILE_SIZE;
 	game->win_height = game->map.rows * TILE_SIZE;
 	game->win_ptr = mlx_new_window(game->mlx_ptr,
 			game->win_width, game->win_height, "so_long");
 	if (!game->win_ptr)
-		error_exit("Error\nWindow creation failed");
+		error_exit("Error\nWindow creation failed", game);
 	load_images(game);
 	render_map(game);
 }

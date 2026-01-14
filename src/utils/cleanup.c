@@ -6,7 +6,7 @@
 /*   By: yagunduz <yagunduz@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/24 00:00:00 by yagunduz          #+#    #+#             */
-/*   Updated: 2026/01/13 20:28:27 by yagunduz         ###   ########.fr       */
+/*   Updated: 2026/01/14 19:57:34 by yagunduz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,11 @@ void	cleanup_game(t_game *game)
 	free_map(game->map.full);
 	if (game->win_ptr)
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+	if (game->mlx_ptr)
+	{
+		mlx_destroy_display(game->mlx_ptr);
+		free(game->mlx_ptr);
+	}
 }
 
 int	close_game(t_game *game)

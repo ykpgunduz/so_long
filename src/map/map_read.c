@@ -6,7 +6,7 @@
 /*   By: yagunduz <yagunduz@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 11:17:01 by yagunduz          #+#    #+#             */
-/*   Updated: 2026/01/13 17:42:41 by yagunduz         ###   ########.fr       */
+/*   Updated: 2026/01/14 20:24:13 by yagunduz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static int	get_map_height(char *filename)
 		free(line);
 	}
 	close(fd);
+	get_next_line(-1);
 	return (height);
 }
 
@@ -42,7 +43,7 @@ static void	fill_map(char *filename, t_game *game)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		error_exit("Error\nCannot open map file");
+		error_exit("Error\nCannot open map file", game);
 	i = 0;
 	while (i < game->map.rows)
 	{
@@ -55,18 +56,19 @@ static void	fill_map(char *filename, t_game *game)
 	}
 	game->map.full[i] = NULL;
 	close(fd);
+	get_next_line(-1);
 }
 
 void	init_map(char *filename, t_game *game)
 {
 	if (!check_extension(filename))
-		error_exit("Error\nMap file must be .ber");
+		error_exit("Error\nMap file must be .ber", NULL);
 	game->map.rows = get_map_height(filename);
 	if (game->map.rows == 0)
-		error_exit("Error\nEmpty map or file error");
+		error_exit("Error\nEmpty map or file error", NULL);
 	game->map.full = malloc(sizeof(char *) * (game->map.rows + 1));
 	if (!game->map.full)
-		error_exit("Error\nMemory allocation failed");
+		error_exit("Error\nMemory allocation failed", game);
 	fill_map(filename, game);
 	validate_map(game);
 }

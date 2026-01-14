@@ -6,7 +6,7 @@
 /*   By: yagunduz <yagunduz@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/24 00:00:00 by yagunduz          #+#    #+#             */
-/*   Updated: 2026/01/14 11:45:56 by yagunduz         ###   ########.fr       */
+/*   Updated: 2026/01/14 20:53:30 by yagunduz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,18 +95,18 @@ static int	check_valid_chars(t_game *game)
 void	validate_map(t_game *game)
 {
 	if (!check_rectangle(game))
-		error_exit("Error\nMap must be rectangular");
+		error_exit("Error\nMap must be rectangular", game);
 	count_map_elements(game);
 	if (!check_walls(game))
-		error_exit("Error\nMap must be surrounded by walls");
+		error_exit("Error\nMap must be surrounded by walls", game);
 	if (!check_valid_chars(game))
-		error_exit("Error\nInvalid character in map");
+		error_exit("Error\nInvalid character in map", game);
 	if (game->map.player_count != 1)
-		error_exit("Error\nMap must have exactly one player");
+		error_exit("Error\nMap must have exactly one player", game);
 	if (game->map.exit_count != 1)
-		error_exit("Error\nMap must have exactly one exit");
+		error_exit("Error\nMap must have exactly one exit", game);
 	if (game->map.collectibles < 1)
-		error_exit("Error\nMap must have at least one collectible");
+		error_exit("Error\nMap must have at least one collectible", game);
 	if (!check_valid_path(game))
-		error_exit("Error\nNo valid path to collect all items and reach exit");
+		error_exit("Error\nNo valid path to exit", game);
 }

@@ -6,50 +6,40 @@
 /*   By: yagunduz <yagunduz@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/24 00:00:00 by yagunduz          #+#    #+#             */
-/*   Updated: 2026/01/14 18:59:35 by yagunduz         ###   ########.fr       */
+/*   Updated: 2026/01/14 21:13:49 by yagunduz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
 
-static char	**copy_map(t_game *game)
+static void	block_exit(char **map, t_game *game)
 {
-	char	**map_copy;
-	int		i;
+	int	y;
+	int	x;
 
-	map_copy = malloc(sizeof(char *) * (game->map.rows + 1));
-	if (!map_copy)
-		return (NULL);
-	i = 0;
-	while (i < game->map.rows)
+	y = -1;
+	while (++y < game->map.rows)
 	{
-		map_copy[i] = ft_strdup(game->map.full[i]);
-		if (!map_copy[i])
+		x = -1;
+		while (++x < game->map.cols)
 		{
-			while (--i >= 0)
-				free(map_copy[i]);
-			free(map_copy);
-			return (NULL);
+			if (map[y][x] == 'E')
+				map[y][x] = '1';
 		}
-		i++;
 	}
-	map_copy[i] = NULL;
-	return (map_copy);
 }
 
-static void	flood_fill(char **map, int x, int y, t_game *game, int with_exit)
+static void	flood_fill(char **map, int x, int y, t_game *game)
 {
 	if (x < 0 || x >= game->map.cols || y < 0 || y >= game->map.rows)
 		return ;
 	if (map[y][x] == '1' || map[y][x] == 'V')
 		return ;
-	if (map[y][x] == 'E' && !with_exit)
-		return ;
 	map[y][x] = 'V';
-	flood_fill(map, x + 1, y, game, with_exit);
-	flood_fill(map, x - 1, y, game, with_exit);
-	flood_fill(map, x, y + 1, game, with_exit);
-	flood_fill(map, x, y - 1, game, with_exit);
+	flood_fill(map, x + 1, y, game);
+	flood_fill(map, x - 1, y, game);
+	flood_fill(map, x, y + 1, game);
+	flood_fill(map, x, y - 1, game);
 }
 
 static int	check_all_collected(char **map, t_game *game)
@@ -96,27 +86,27 @@ int	check_valid_path(t_game *game)
 {
 	char	**map_copy;
 	int		result;
-	int		i;
 
 	map_copy = copy_map(game);
 	if (!map_copy)
 		return (0);
-	flood_fill(map_copy, game->player.x, game->player.y, game, 0);
+	block_exit(map_copy, game);
+	flood_fill(map_copy, game->player.x, game->player.y, game);
 	result = check_all_collected(map_copy, game);
-	i = -1;
-	while (++i < game->map.rows)
-		free(map_copy[i]);
+	game->i = -1;
+	while (++(game->i) < game->map.rows)
+		free(map_copy[game->i]);
 	free(map_copy);
 	if (!result)
 		return (0);
 	map_copy = copy_map(game);
 	if (!map_copy)
 		return (0);
-	flood_fill(map_copy, game->player.x, game->player.y, game, 1);
+	flood_fill(map_copy, game->player.x, game->player.y, game);
 	result = check_exit_reachable(map_copy, game);
-	i = -1;
-	while (++i < game->map.rows)
-		free(map_copy[i]);
+	game->i = -1;
+	while (++(game->i) < game->map.rows)
+		free(map_copy[game->i]);
 	free(map_copy);
 	return (result);
 }
