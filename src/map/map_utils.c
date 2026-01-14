@@ -6,7 +6,7 @@
 /*   By: yagunduz <yagunduz@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 11:15:09 by yagunduz          #+#    #+#             */
-/*   Updated: 2026/01/14 18:59:35 by yagunduz         ###   ########.fr       */
+/*   Updated: 2026/01/14 22:17:36 by yagunduz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@ int	check_extension(char *filename)
 	if (!filename)
 		return (0);
 	len = ft_strlen(filename);
-	if (len < 4)
+	if (len < 5)
 		return (0);
-	if (filename[len - 4] == '.' && filename[len - 3] == 'b'
-		&& filename[len - 2] == 'e' && filename[len - 1] == 'r')
+	if (filename[len - 5] != '/'
+		&& filename[len - 4] == '.'
+		&& filename[len - 3] == 'b'
+		&& filename[len - 2] == 'e'
+		&& filename[len - 1] == 'r')
 		return (1);
 	return (0);
 }
