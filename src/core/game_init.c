@@ -1,0 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_init.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yagunduz <yagunduz@student.42istanbul.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/24 00:00:00 by yagunduz          #+#    #+#             */
+/*   Updated: 2026/01/13 20:28:27 by yagunduz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/so_long.h"
+
+void	init_game(t_game *game, char *map_file)
+{
+	game->mlx_ptr = mlx_init();
+	if (!game->mlx_ptr)
+		error_exit("Error\nMLX initialization failed");
+	game->win_ptr = NULL;
+	game->img.stone = NULL;
+	game->img.grass = NULL;
+	game->img.player_left = NULL;
+	game->img.player_right = NULL;
+	game->img.flowers = NULL;
+	game->img.exit_left = NULL;
+	game->img.exit_right = NULL;
+	game->img.finish = NULL;
+	game->player.direction = 1;
+	init_map(map_file, game);
+	game->win_width = game->map.cols * TILE_SIZE;
+	game->win_height = game->map.rows * TILE_SIZE;
+	game->win_ptr = mlx_new_window(game->mlx_ptr,
+			game->win_width, game->win_height, "so_long");
+	if (!game->win_ptr)
+		error_exit("Error\nWindow creation failed");
+	load_images(game);
+	render_map(game);
+}
