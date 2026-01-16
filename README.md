@@ -1,4 +1,4 @@
-*Bu proje, 42 müfredatının bir parçası olarak yagunduz tarafından oluşturulmuştur.*
+*This project has been created as part of the 42 curriculum by yagunduz.*
 
 # so_long
 
