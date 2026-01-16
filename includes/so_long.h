@@ -6,7 +6,7 @@
 /*   By: yagunduz <yagunduz@student.42istanbul.com.tr> +#+  +:+       +#+     */
 /*                                                   +#+#+#+#+#+   +#+        */
 /*   Created: 2025/11/25 15:54:59 by yagunduz             #+#    #+#          */
-/*   Updated: 2026/01/16 23:20:34 by yagunduz            ###   ########.tr    */
+/*   Updated: 2026/01/17 01:06:59 by yagunduz            ###   ########.tr    */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int		key_handler(int keycode, t_game *game);
 void	move_player(t_game *game, int new_x, int new_y);
 
 void	free_map(char **map);
+void	destroy_images(t_game *game);
 void	cleanup_game(t_game *game);
 void	error_exit(char *message, t_game *game);
 

@@ -6,7 +6,7 @@
 /*   By: yagunduz <yagunduz@student.42istanbul.com.tr> +#+  +:+       +#+     */
 /*                                                   +#+#+#+#+#+   +#+        */
 /*   Created: 2025/11/25 00:00:00 by yagunduz             #+#    #+#          */
-/*   Updated: 2026/01/17 00:04:07 by yagunduz            ###   ########.tr    */
+/*   Updated: 2026/01/17 01:06:59 by yagunduz            ###   ########.tr    */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	free_map(char **map)
 	free(map);
 }
 
-static void	destroy_images(t_game *game)
+void	destroy_images(t_game *game)
 {
 	if (game->img.stone)
 		mlx_destroy_image(game->mlx_ptr, game->img.stone);

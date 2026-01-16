@@ -6,31 +6,11 @@
 /*   By: yagunduz <yagunduz@student.42istanbul.com.tr> +#+  +:+       +#+     */
 /*                                                   +#+#+#+#+#+   +#+        */
 /*   Created: 2025/11/25 00:00:00 by yagunduz             #+#    #+#          */
-/*   Updated: 2026/01/17 00:04:07 by yagunduz            ###   ########.tr    */
+/*   Updated: 2026/01/17 01:06:59 by yagunduz            ###   ########.tr    */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
-
-static void	destroy_images(t_game *game)
-{
-	if (game->img.stone)
-		mlx_destroy_image(game->mlx_ptr, game->img.stone);
-	if (game->img.grass)
-		mlx_destroy_image(game->mlx_ptr, game->img.grass);
-	if (game->img.player_left)
-		mlx_destroy_image(game->mlx_ptr, game->img.player_left);
-	if (game->img.player_right)
-		mlx_destroy_image(game->mlx_ptr, game->img.player_right);
-	if (game->img.flowers)
-		mlx_destroy_image(game->mlx_ptr, game->img.flowers);
-	if (game->img.exit_left)
-		mlx_destroy_image(game->mlx_ptr, game->img.exit_left);
-	if (game->img.exit_right)
-		mlx_destroy_image(game->mlx_ptr, game->img.exit_right);
-	if (game->img.finish)
-		mlx_destroy_image(game->mlx_ptr, game->img.finish);
-}
 
 void	error_exit(char *message, t_game *game)
 {
