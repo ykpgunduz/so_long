@@ -6,7 +6,7 @@
 /*   By: yagunduz <yagunduz@student.42istanbul.com.tr> +#+  +:+       +#+     */
 /*                                                   +#+#+#+#+#+   +#+        */
 /*   Created: 2025/12/24 00:00:00 by yagunduz             #+#    #+#          */
-/*   Updated: 2026/01/16 23:23:22 by yagunduz            ###   ########.tr    */
+/*   Updated: 2026/01/17 00:01:19 by yagunduz            ###   ########.tr    */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	*load_image(t_game *game, char *path)
 	return (img);
 }
 
-static void	load_game_images(t_game *game)
+void	load_images(t_game *game)
 {
 	game->img.stone = load_image(game, "./assets/textures/stone.xpm");
 	game->img.grass = load_image(game, "./assets/textures/grass.xpm");
@@ -47,11 +47,6 @@ static void	load_game_images(t_game *game)
 			"./assets/textures/exit-left.xpm");
 	game->img.exit_right = load_image(game,
 			"./assets/textures/exit-right.xpm");
-}
-
-void	load_images(t_game *game)
-{
-	load_game_images(game);
 }
 
 void	put_image(t_game *game, void *img, int x, int y)
