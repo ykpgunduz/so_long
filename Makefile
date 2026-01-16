@@ -29,7 +29,12 @@ OBJS	= $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(MLX_DIR):
+	@if [ ! -d "$(MLX_DIR)" ]; then \
+		git clone https://github.com/42Paris/minilibx-linux.git $(MLX_DIR); \
+	fi
+
+$(NAME): $(MLX_DIR) $(OBJS)
 	@make -s -C $(MLX_DIR)
 	@make -s -C $(LIBFT_DIR)
 	@make -s -C $(PRINTF_DIR)
