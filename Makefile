@@ -46,7 +46,7 @@ $(NAME): $(MLX_DIR) $(OBJS)
 
 clean:
 	@rm -rf $(OBJS)
-	@make -s -C $(MLX_DIR) clean
+	@if [ -d "$(MLX_DIR)" ]; then make -s -C $(MLX_DIR) clean; fi
 	@make -s -C $(LIBFT_DIR) clean
 	@make -s -C $(PRINTF_DIR) clean
 	@make -s -C $(GNL_DIR) clean
@@ -54,7 +54,7 @@ clean:
 
 fclean: clean
 	@rm -rf $(NAME)
-	@make -s -C $(MLX_DIR) clean
+	@if [ -d "$(MLX_DIR)" ]; then make -s -C $(MLX_DIR) clean; fi
 	@make -s -C $(LIBFT_DIR) fclean
 	@make -s -C $(PRINTF_DIR) fclean
 	@make -s -C $(GNL_DIR) fclean
